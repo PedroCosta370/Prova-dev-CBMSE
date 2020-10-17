@@ -11,14 +11,29 @@ import java.util.List;
 public class PersonService {
 
     @Autowired
-    PersonRepository personRepository;
+    private PersonRepository personRepository;
 
-    public Person save(Person person){
-        return personRepository.save(person);
+    public Person findById(Integer id){
+        return personRepository.findById(id).orElse(null);
     }
 
     public List<Person> findAll(){
         return personRepository.findAll();
     }
+
+    public Person save(Person person){
+        return personRepository.save(person);
+    }
+
+
+    public boolean delete(Integer id){
+        try {
+            personRepository.deleteById(id);;
+            return true;
+        }catch (Exception exception){
+            return false;
+        }
+    }
+
 
 }
